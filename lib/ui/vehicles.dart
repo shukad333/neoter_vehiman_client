@@ -58,9 +58,18 @@ class _VehiclesState extends State<Vehicles> {
   ListView _jobsListView(data) {
     return ListView.builder(
         itemCount: data.length,
-        itemBuilder: (context, index) {
-          return _tile(data[index].name, data[index].number);
-        });
+        itemBuilder: (context, index) => Card(
+
+          child: _tile(data[index].name, data[index].number),
+          elevation: 6,
+          margin: EdgeInsets.all(10),
+
+          ),
+        );
+        // itemBuilder: (context, index) {
+        //   return _tile(data[index].name, data[index].number);
+        // });
+
   }
 
   ListTile _tile(String name, String number) => ListTile(
@@ -69,11 +78,13 @@ class _VehiclesState extends State<Vehicles> {
           fontWeight: FontWeight.w500,
           fontSize: 20,
         )),
+
     subtitle: Text(number),
-    leading: Icon(
-      Icons.car_repair,
-      color: Colors.blue[500],
-    ),
+
+    trailing: Icon(
+    Icons.car_repair,
+    color: Colors.blue[500],
+  )
   );
 }
 
