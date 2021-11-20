@@ -1,31 +1,32 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:vehimanclient/model/entity_model.dart';
 import 'package:vehimanclient/model/vehicle_model.dart';
 import 'package:vehimanclient/rest/service_client.dart';
 import 'package:vehimanclient/ui/new_vehicle.dart';
 import 'package:http/http.dart' as http;
 
 
-class Vehicles extends StatefulWidget {
-  const Vehicles({Key? key}) : super(key: key);
+class Entities extends StatefulWidget {
+  const Entities({Key? key}) : super(key: key);
 
   @override
-  _VehiclesState createState() => _VehiclesState();
+  _EntitiesState createState() => _EntitiesState();
 }
 
-class _VehiclesState extends State<Vehicles> {
+class _EntitiesState extends State<Entities> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Vehicles"),
       ),
-      body:  FutureBuilder<List<Vehicle>>(
-        future: fetchVehicles(),
+      body:  FutureBuilder<List<Entity>>(
+        future: fetchEntites(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Vehicle>? data = snapshot.data;
+            List<Entity>? data = snapshot.data;
             return _jobsListView(data);
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
@@ -49,7 +50,7 @@ class _VehiclesState extends State<Vehicles> {
         itemCount: data.length,
         itemBuilder: (context, index) => Card(
 
-          child: _tile(data[index].name, data[index].number),
+          child: _tile(data[index].name, data[index].subType),
           elevation: 6,
           margin: EdgeInsets.all(10),
 
@@ -61,14 +62,14 @@ class _VehiclesState extends State<Vehicles> {
 
   }
 
-  ListTile _tile(String name, String number) => ListTile(
+  ListTile _tile(String name, String subType) => ListTile(
     title: Text(name,
         style: TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 20,
         )),
 
-    subtitle: Text(number),
+    subtitle: Text(subType),
 
     trailing: Icon(
     Icons.car_repair,

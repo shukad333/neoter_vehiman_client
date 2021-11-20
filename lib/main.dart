@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vehimanclient/ui/entities.dart';
 import 'package:vehimanclient/ui/vehicles.dart';
 
 void main() {
@@ -10,63 +11,37 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Vehi Man',
       theme: ThemeData(
 
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Entities(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
 
-  final String title;
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
 
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _navigateToVehicles(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Vehicles()));
-  }
   @override
   Widget build(BuildContext context) {
-
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+      body: Stack(
+        children: [
+          Container(
+            height: size.height * 0.45,
+            decoration: BoxDecoration(
+              color: Color(0x66623EFF),
+            ),
+          )
+        ],
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-
-            ElevatedButton(onPressed: ()=>_navigateToVehicles(context), child: Text("Vehicles"))
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
+
